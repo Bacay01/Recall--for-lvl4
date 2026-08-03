@@ -46,4 +46,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       },
     }),
   ],
+
+  callbacks: {
+    async signIn({ user, account }) {
+      if (account?.provider === "google" && user.email) {
+        await prisma.user.upsert({
+          where: { email: user.email },
+          update: {},
+          create: {
+            email: user.email,
+            name: user.name,
+          },
+        });
+      }
+      return true;
+    },
+  },t t
 });
