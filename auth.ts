@@ -61,5 +61,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
       }
       return true;
     },
-  },t t
+  },
 });
